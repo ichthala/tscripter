@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'tscripter'
+
+runner = Tscripter::Runner.new
+runner.go

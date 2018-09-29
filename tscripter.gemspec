@@ -6,8 +6,8 @@ require 'tscripter/version'
 Gem::Specification.new do |spec|
   spec.name          = "tscripter"
   spec.version       = Tscripter::VERSION
-  spec.authors       = ["Alice M."]
-  spec.email         = ["ichthala@gmail.coms"]
+  spec.authors       = ["A. M."]
+  spec.email         = ["ichthala@gmail.com"]
 
   spec.summary       = %q{This gem edits transcript files.}
   spec.description   = %q{This gem edits transcript files.}

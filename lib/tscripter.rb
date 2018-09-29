@@ -7,9 +7,9 @@ module Tscripter
       puts(go_with_args(ARGV))
     end
 
-    def go_with_args(*args)
+    def go_with_args(args)
       if filename = args[0]
-        file_basename = File.basename(args[0], File.extname(args[0]))
+        file_basename = File.basename(filename, File.extname(filename))
         id1 = args[1]
         id2 = args[2]
 
@@ -20,7 +20,7 @@ module Tscripter
         edited_file_content = generate_edited_text(transcript_text, id1, id2)
 
         edited_file = File.new("#{file_basename}_edited_#{Time.now.to_i}.txt", "w")
-        File.write(edited_file_content)
+        edited_file.write(edited_file_content)
         edited_file.close
 
         "Transcript edit complete."

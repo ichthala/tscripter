@@ -102,19 +102,17 @@ Nice to see you today.
 You too.
 
 
-        STR
+STR
       }
 
-      it 'leaves white space lines undisturbed' do
-        expect(runner.generate_edited_text(content_with_notation, "1", "2")).to eq(
+      it 'leaves white space lines undisturbed, except file end' do
+        expect(runner.generate_edited_text(content_with_blank_lines, "1", "2")).to eq(
 <<-STR
 1: Hello there.
 
 2: Hi!
 1: Nice to see you today.
 2: You too.
-
-
 STR
         )
       end

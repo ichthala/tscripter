@@ -122,11 +122,3 @@ STR
   end
 end
 
-def fixture_file(filename)
-  if filename.blank?
-    ''
-  else
-    File.new(File.expand_path("fixtures/#{filename}", File.dirname(__FILE__)))
-  end
-end
-

@@ -1,28 +1,25 @@
 # Tscripter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tscripter`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem edits transcript files, given that they are in the expected format.
 
-TODO: Delete this and the text above, and describe your gem
+Current features:
+- Prepends alternating IDs to spoken lines
+
+Expected format:
+- File must be .txt
+- Speakers of each line must alternate
+- Lines that start with square brackets (stage directions) will be skipped
+- Whitespace lines are skipped
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'tscripter'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install tscripter
+    `$ gem install tscripter`
 
 ## Usage
 
-TODO: Write usage instructions here
+`tscripter filename.txt AAA BBB`
+
+AAA and BBB are the IDs to prepend.
 
 ## Development
 
@@ -32,8 +29,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tscripter.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/ichthala/tscripter.
 
 ## License
 

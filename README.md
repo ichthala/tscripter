@@ -19,11 +19,11 @@ Expected format:
 
 ## Installation
 
-    `$ gem install tscripter`
+    $ gem install tscripter
 
 ## Usage
 
-`$ tscripter filename.txt AAA BBB`
+    $ tscripter filename.txt AAA BBB
 
 AAA and BBB are the IDs to prepend.
 

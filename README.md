@@ -5,6 +5,12 @@ This gem edits transcript files, given that they are in the expected format.
 Current features:
 - Prepends alternating IDs to spoken lines
 
+Planned features:
+- Detect spoken lines that start with stage directions
+- Implement notation for consecutive lines by the same speaker
+- Accept multiple filenames
+- Accept wildcard filenames
+
 Expected format:
 - File must be .txt
 - Speakers of each line must alternate
@@ -17,7 +23,7 @@ Expected format:
 
 ## Usage
 
-`tscripter filename.txt AAA BBB`
+`$ tscripter filename.txt AAA BBB`
 
 AAA and BBB are the IDs to prepend.
 

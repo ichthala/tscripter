@@ -1,23 +1,37 @@
 # Tscripter
 
-This gem edits transcript files, given that they are in the expected format.
+This gem edits transcript files. Files must be plaintext (.txt).
 
 Current features:
-- Prepends alternating IDs to spoken lines
-- Detect spoken lines that start with stage directions
-- Implement notation for consecutive lines by the same speaker
+- Prepend alternating IDs to spoken lines
 - If a line starts with `^`, then the speaker is the same as the previous line
-- The pattern `*i 00:00` (where 00:00 is any timestamp) is replaced with `inaudible [00:00]`
+  - Example:
+  ```
+  What's wrong?
+  You've changed, Heathcliff...
+  [looks to the moon]
+  ^ ...and I don't know who you are anymore.
+  That's not true!
+  ```
+  becomes:
+  ```
+  Heathcliff: What's wrong?
+  Cathy: You've changed, Heathcliff...
+  [looks to the moon]
+  Cathy: ...and I don't know who you are anymore.
+  Heathcliff: That's not true!
+  ```
+
+- Replace pattern `*i MM:SS` (where MM:SS is any timestamp) with `inaudible [MM:SS]`
+  - Example: `But what if *i 10:05 to the end?` --> `A: But what if [inaudible 10:05] to the end?`
+  - Note: Currently only supports MM:SS timestamps, not HH:MM:SS
+- Lines that contain _only_ stage directions (text inside [square brackets]) are left intact
+- Lines that contain _only_ whitespace are left intact
 
 Planned features:
 - Accept multiple filenames
 - Accept wildcard filenames
-
-Expected format:
-- File must be .txt
-- Speakers of each line must alternate
-- Lines that start with square brackets (stage directions) will be skipped
-- Whitespace lines are skipped
+- Support HH:MM:SS timestamps
 
 ## Sample input and output
 
@@ -27,30 +41,30 @@ Hello there.
 
 Hello to you too.
 
-I can't read books anymore.
+Lovely night on the moors.
 [uncomfortable silence]
-This is fun, don't you agree?
+This is splendid, don't you agree?
 I mean, I would never...
 [pause]
 ^ disagree with you.
-But what if *i 45:09
-[turns away] You can't really mean that!
+But what if *i 45:09 tomorrow?
+[turns away] You can't mean that!
 ```
 
 Output:
 ```
-A: Hello there.
+Heathcliff: Hello there.
 
-B: Hello to you too.
+Cathy: Hello to you too.
 
-A: I can't read books anymore.
+Heathcliff: Lovely night on the moors.
 [uncomfortable silence]
-B: This is fun, don't you agree?
-A: I mean, I would never...
+Cathy: This is splendid, don't you agree?
+Heathcliff: I mean, I would never...
 [pause]
-A: disagree with you.
-B: But what if [inaudible 45:09]
-A: [turns away] You can't really mean that!
+Heathcliff: disagree with you.
+Cathy: But what if [inaudible 45:09] tomorrow?
+Heathcliff: [turns away] You can't mean that!
 ```
 
 ## Installation
@@ -59,7 +73,7 @@ A: [turns away] You can't really mean that!
 
 ## Usage
 
-    $ tscripter filename.txt AAA BBB
+    $ tscripter filename.txt Heathcliff Cathy
 
 AAA and BBB are the IDs to prepend.
 

@@ -13,7 +13,7 @@ Current features:
   ^ ...and I don't know who you are anymore.
   That's not true!
   ```
-  becomes:
+  becomes...
   ```
   Heathcliff: What's wrong?
   Cathy: You've changed, Heathcliff...
@@ -23,9 +23,18 @@ Current features:
   ```
 
 - Replace pattern `*i MM:SS` (where MM:SS is any timestamp) with `inaudible [MM:SS]`
-  - Example: `But what if *i 10:05 to the end?` --> `A: But what if [inaudible 10:05] to the end?`
+  - Example:
+  ```
+  But what if *i 10:05 to the end?
+  ```
+  becomes...
+  ```
+  Heathcliff: But what if [inaudible 10:05] to the end?
+  ```
   - Note: Currently only supports MM:SS timestamps, not HH:MM:SS
+
 - Lines that contain _only_ stage directions (text inside [square brackets]) are left intact
+
 - Lines that contain _only_ whitespace are left intact
 
 Planned features:

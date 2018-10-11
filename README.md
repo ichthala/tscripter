@@ -19,6 +19,40 @@ Expected format:
 - Lines that start with square brackets (stage directions) will be skipped
 - Whitespace lines are skipped
 
+## Sample input and output
+
+Input:
+```
+Hello there.
+
+Hello to you too.
+
+I can't read books anymore.
+[uncomfortable silence]
+This is fun, don't you agree?
+I mean, I would never...
+[pause]
+^ disagree with you.
+But what if *i 45:09
+[turns away] You can't really mean that!
+```
+
+Output:
+```
+A: Hello there.
+
+B: Hello to you too.
+
+A: I can't read books anymore.
+[uncomfortable silence]
+B: This is fun, don't you agree?
+A: I mean, I would never...
+[pause]
+A: disagree with you.
+B: But what if [inaudible 45:09]
+A: [turns away] You can't really mean that!
+```
+
 ## Installation
 
     $ gem install tscripter

@@ -7,5 +7,7 @@ Oh look, another line!
 This is fun!
 I agree!
 I mean right?
-Yup!
+^ Yup!
+But what if *i 45:09
+[turns away] You can't really mean that!
 

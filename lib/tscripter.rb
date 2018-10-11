@@ -4,7 +4,7 @@ require "tscripter/version"
 module Tscripter
   class Runner
     def go
-      puts(go_with_args(ARGV))
+      puts(go_with_args(*ARGV))
     end
 
     def go_with_args(*args)

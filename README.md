@@ -7,7 +7,6 @@ This gem edits transcript files. Files must be plaintext (.txt).
 - If a line starts with `^`, then the speaker is the same as the previous line
   - Example:
   ```
-  What's wrong?
   You've changed, Heathcliff...
   [looks to the moon]
   ^ ...and I don't know who you are anymore.
@@ -15,7 +14,6 @@ This gem edits transcript files. Files must be plaintext (.txt).
   ```
   becomes...
   ```
-  Heathcliff: What's wrong?
   Cathy: You've changed, Heathcliff...
   [looks to the moon]
   Cathy: ...and I don't know who you are anymore.

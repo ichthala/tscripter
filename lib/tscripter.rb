@@ -7,7 +7,7 @@ module Tscripter
       puts(go_with_args(ARGV))
     end
 
-    def go_with_args(args)
+    def go_with_args(*args)
       if filename = args[0]
         file_basename = File.basename(filename, File.extname(filename))
         id1 = args[1]
@@ -33,25 +33,58 @@ module Tscripter
 
     def generate_edited_text(text, id1, id2)
       edited_text = ""
-      use_id1 = true
+      ids = [id1, id2]
+      count = 0
 
-      text.split("\n").each do |line, i|
-        if line[0] == "[" || line.strip == ""
+      text.split("\n").each do |line|
+        curr_id = ids[count % ids.length]
+
+        if line[0] == "["
+          if /^\[.*\].*\w+/ =~ line
+            edited_text << process_line(curr_id, line)
+            count += 1
+          else
+            edited_text << "#{line}\n"
+          end
+        elsif line.strip == ""
           edited_text << "#{line}\n"
-          next
-        end
-
-        if use_id1
-          edited_text << "#{id1}: #{line}\n"
+        elsif line[0] == "^"
+          curr_id = ids[(count % ids.length) - 1]
+          edited_text << process_line(curr_id, line)
         else
-          edited_text << "#{id2}: #{line}\n"
+          edited_text << process_line(curr_id, line)
+          count += 1
         end
 
-        use_id1 = !use_id1
+        # edited_text << "\n"
       end
 
       edited_text
     end
 
+    private
+
+    def process_line(id, line)
+      line = remove_markup(line)
+      line = add_inaudible_notation(line)
+      "#{id}: #{line}\n"
+    end
+
+    def remove_markup(line)
+      if line[0] == '^'
+        line = line.slice(/\^\s(.*)/, 1)
+      else
+        line
+      end
+    end
+
+    def add_inaudible_notation(line)
+      line.scan(/\*[iI]\s\d{1,2}\:\d{1,2}/) do |inaud_markup|
+        timestamp = inaud_markup.match(/(\d{1,2}\:\d{1,2})/)[1]
+        inaudible_notation = "[inaudible #{timestamp}]"
+        line = line.gsub(inaud_markup, inaudible_notation)
+      end
+      line
+    end
   end
 end

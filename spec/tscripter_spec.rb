@@ -67,7 +67,7 @@ describe Tscripter::Runner do
     end
 
     context 'when file has lines that start with square brackets' do
-      let(:content_with_notation) {
+      let(:content_with_stage_directions) {
         <<-STR.gsub(/^\s*/, "")
           Hello there.
           [quietly]
@@ -79,7 +79,7 @@ describe Tscripter::Runner do
       }
 
       it 'leaves square bracket lines undisturbed' do
-        expect(runner.generate_edited_text(content_with_notation, "1", "2")).to eq(
+        expect(runner.generate_edited_text(content_with_stage_directions, "1", "2")).to eq(
           <<-STR.gsub(/^\s*/, "")
             1: Hello there.
             [quietly]
@@ -89,6 +89,34 @@ describe Tscripter::Runner do
             [end of transcipt]
           STR
         )
+      end
+
+      context 'and some of those lines include speech' do
+        let(:content_with_stage_directions) {
+          <<-STR.gsub(/^\s*/, "")
+            Hello there.
+            [quietly]
+            Hi!
+            Nice to see you today.
+            [turns away] You too.
+            [end of transcipt]
+          STR
+        }
+
+        it 'prepends IDs to lines with stage directions + speech' do
+          expect(
+            runner.generate_edited_text(content_with_stage_directions, "1", "2")
+          ).to eq(
+            <<-STR.gsub(/^\s*/, "")
+              1: Hello there.
+              [quietly]
+              2: Hi!
+              1: Nice to see you today.
+              2: [turns away] You too.
+              [end of transcipt]
+            STR
+          )
+        end
       end
     end
 
@@ -115,6 +143,56 @@ STR
 2: You too.
 STR
         )
+      end
+    end
+
+    context 'markup features:' do
+      context 'when a line starts with ^' do
+        let(:content_with_markup) {
+          <<-STR.gsub(/^\s*/, "")
+            Hello there.
+            Hi!
+            Nice to see you today.
+            [sneezes]
+            ^ Sorry, I have a cold.
+            Oh, that's okay.
+          STR
+        }
+
+        it "does not change the speaker" do
+          expect(runner.generate_edited_text(content_with_markup, "A", "B")).to eq(
+            <<-STR.gsub(/^\s*/, "")
+              A: Hello there.
+              B: Hi!
+              A: Nice to see you today.
+              [sneezes]
+              A: Sorry, I have a cold.
+              B: Oh, that's okay.
+            STR
+          )
+        end
+      end
+
+      context 'when the text contains *i followed by a timestamp' do
+        let(:content_with_markup) {
+          <<-STR.gsub(/^\s*/, "")
+            Hello there.
+            Hi!
+            Nice to see you *i 45:20 What do you think of that? *i 45:40
+            I'm not sure.
+          STR
+        }
+
+        it 'inserts inaudible notation' do
+          expect(runner.generate_edited_text(content_with_markup, "A", "B")).to eq(
+            <<-STR.gsub(/^\s*/, "")
+              A: Hello there.
+              B: Hi!
+              A: Nice to see you [inaudible 45:20] What do you think of that? [inaudible 45:40]
+              B: I'm not sure.
+            STR
+          )
+        end
       end
     end
   end

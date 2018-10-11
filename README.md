@@ -7,7 +7,7 @@ Current features:
 - Detect spoken lines that start with stage directions
 - Implement notation for consecutive lines by the same speaker
 - If a line starts with `^`, then the speaker is the same as the previous line
-- The pattern `*i 00:00` (where 00:00 is any timestamp) is replaced with `inaudible [00:00]
+- The pattern `*i 00:00` (where 00:00 is any timestamp) is replaced with `inaudible [00:00]`
 
 Planned features:
 - Accept multiple filenames

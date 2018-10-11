@@ -82,7 +82,7 @@ Heathcliff: [turns away] You can't mean that!
 
     $ tscripter filename.txt Heathcliff Cathy
 
-AAA and BBB are the IDs to prepend.
+`Heathcliff` and `Cathy` are the IDs to prepend.
 
 ## Development
 

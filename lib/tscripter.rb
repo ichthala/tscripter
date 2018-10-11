@@ -72,14 +72,14 @@ module Tscripter
 
     def remove_markup(line)
       if line[0] == '^'
-        line = line.slice(/\^\s(.*)/, 1)
+        line = line.slice(/\^\s*(.*)/, 1)
       else
         line
       end
     end
 
     def add_inaudible_notation(line)
-      line.scan(/\*[iI]\s\d{1,2}\:\d{1,2}/) do |inaud_markup|
+      line.scan(/\*[iI]\s*\d{1,2}\:\d{1,2}/) do |inaud_markup|
         timestamp = inaud_markup.match(/(\d{1,2}\:\d{1,2})/)[1]
         inaudible_notation = "[inaudible #{timestamp}]"
         line = line.gsub(inaud_markup, inaudible_notation)

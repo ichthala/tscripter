@@ -2,7 +2,7 @@
 
 This gem edits transcript files. Files must be plaintext (.txt).
 
-Current features:
+## Current features:
 - Prepend alternating IDs to spoken lines
 - If a line starts with `^`, then the speaker is the same as the previous line
   - Example:
@@ -37,11 +37,6 @@ Current features:
 
 - Lines that contain _only_ whitespace are left intact
 
-Planned features:
-- Accept multiple filenames
-- Accept wildcard filenames
-- Support HH:MM:SS timestamps
-
 ## Sample input and output
 
 Input:
@@ -75,6 +70,11 @@ Heathcliff: disagree with you.
 Cathy: But what if [inaudible 45:09] tomorrow?
 Heathcliff: [turns away] You can't mean that!
 ```
+
+## Planned features:
+- Accept multiple filenames
+- Accept wildcard filenames
+- Support HH:MM:SS timestamps
 
 ## Installation
 
